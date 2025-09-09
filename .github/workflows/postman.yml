@@ -23,7 +23,7 @@ jobs:
 
       - name: Run Postman Collection
         run: |
-          postman collection run "Postman Collections/Reqress_Assurdly.json" \
+          postman collection run "Postman/Reqress_Assurdly.json" \
             -r cli,html --bail
 
       - name: Upload HTML report
