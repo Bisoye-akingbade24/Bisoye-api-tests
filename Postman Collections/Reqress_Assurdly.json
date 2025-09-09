@@ -1,0 +1,2328 @@
+{
+	"info": {
+		"_postman_id": "ce1c3670-7c14-4808-856f-c9090506109b",
+		"name": "Reqres-Assurdly",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "create a user",
+			"item": [
+				{
+					"name": "Creates a user - Success",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "5839152f-f030-4c95-83ca-a4bb39c2a9fe",
+								"exec": [
+									"var jsonData = pm.response.json()",
+									"var id = jsonData.id",
+									"pm.collectionVariables.set('user_id', id)",
+									"",
+									"pm.test(\"Status code is 201\", function () {",
+									"    pm.response.to.have.status(201);",
+									"});",
+									"",
+									"pm.test(\"Status message is Created\", function () {",
+									"    pm.expect(pm.response.status).to.eql(\"Created\");",
+									"});",
+									"",
+									"pm.test(\"verify that name is returned\", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"name\");",
+									"});",
+									"",
+									"pm.test(\"verify that id is returned\", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"id\");",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"id": "5f0d46c8-102f-42d9-b4e0-2a79b7f04c70",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "x-api-key",
+								"value": "reqres-free-v1",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Aisha\",\n    \"job\": \"Akingbade\"\n}\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{baseUrl}}/users"
+					},
+					"response": [
+						{
+							"id": "49302518-1053-4aeb-a12d-bf1f19ffa17b",
+							"name": "Success",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"username\": \"tempor dolor nisi\",\n  \"email\": \"officia incididunt enim\",\n  \"password\": \"deserunt laboris\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "{{baseUrl}}/register"
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"responseTime": null,
+							"body": "{\n  \"id\": \"non\",\n  \"token\": \"est fugiat\"\n}"
+						},
+						{
+							"id": "e9118fa1-3cea-4cbc-b85b-e882d7d61dee",
+							"name": "Register error",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"username\": \"tempor dolor nisi\",\n  \"email\": \"officia incididunt enim\",\n  \"password\": \"deserunt laboris\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "{{baseUrl}}/register"
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"responseTime": null,
+							"body": "{\n  \"error\": \"occaecat\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Creates a user - Invalid names(alphanumeric characters)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "9a5692ee-2c26-4757-a2d3-6a590ba40f65",
+								"exec": [
+									"pm.test(\"Status code is 400\", function () {",
+									"    pm.response.to.have.status(400);",
+									"});",
+									"",
+									"pm.test(\"Status message is Bad Request\", function () {",
+									"    pm.expect(pm.response.status).to.eql(\"Bad Request\");",
+									"});",
+									"",
+									"pm.test(\"verify tghat error is returned\", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"Missing email or username\");",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"id": "ddec2bbc-a13c-4f28-8f26-fcbeb77f6f9a",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "x-api-key",
+								"value": "reqres-free-v1",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"56#44@\",\n    \"job\": \"^&*(334rd\"\n}\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{baseUrl}}/register"
+					},
+					"response": [
+						{
+							"id": "5eb1e729-ffb1-46a7-bc53-72b75f4dff4a",
+							"name": "Success",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"username\": \"tempor dolor nisi\",\n  \"email\": \"officia incididunt enim\",\n  \"password\": \"deserunt laboris\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "{{baseUrl}}/register"
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"responseTime": null,
+							"body": "{\n  \"id\": \"non\",\n  \"token\": \"est fugiat\"\n}"
+						},
+						{
+							"id": "09b403a0-a815-4120-8493-debbc05d4dbb",
+							"name": "Register error",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"username\": \"tempor dolor nisi\",\n  \"email\": \"officia incididunt enim\",\n  \"password\": \"deserunt laboris\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "{{baseUrl}}/register"
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"responseTime": null,
+							"body": "{\n  \"error\": \"occaecat\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Creates a user - Empty fields",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "a6811bda-1089-4350-bca0-c71db788b8d4",
+								"exec": [
+									"pm.test(\"Status code is 400\", function () {",
+									"    pm.response.to.have.status(400);",
+									"});",
+									"",
+									"pm.test(\"Status message is Bad Request\", function () {",
+									"    pm.expect(pm.response.status).to.eql(\"Bad Request\");",
+									"});",
+									"",
+									"pm.test(\"verify tghat error is returned\", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"Missing email or username\");",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"id": "cab6a49f-871d-492c-8169-f04498b84a6f",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "x-api-key",
+								"value": "reqres-free-v1",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"\",\n    \"job\": \"\"\n}\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{baseUrl}}/register"
+					},
+					"response": [
+						{
+							"id": "ddc9cf59-368a-4950-a972-877a9949336e",
+							"name": "Success",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"username\": \"tempor dolor nisi\",\n  \"email\": \"officia incididunt enim\",\n  \"password\": \"deserunt laboris\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "{{baseUrl}}/register"
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"responseTime": null,
+							"body": "{\n  \"id\": \"non\",\n  \"token\": \"est fugiat\"\n}"
+						},
+						{
+							"id": "3ed61f79-f08a-4c21-aeda-e06b8a7560f6",
+							"name": "Register error",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"username\": \"tempor dolor nisi\",\n  \"email\": \"officia incididunt enim\",\n  \"password\": \"deserunt laboris\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "{{baseUrl}}/register"
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"responseTime": null,
+							"body": "{\n  \"error\": \"occaecat\"\n}"
+						}
+					]
+				}
+			],
+			"id": "2e1a6e47-9153-4d44-9390-32df7e65a453"
+		},
+		{
+			"name": "Register",
+			"item": [
+				{
+					"name": "Creates a user - Success",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "5839152f-f030-4c95-83ca-a4bb39c2a9fe",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Status message is OK\", function () {",
+									"    pm.expect(pm.response.status).to.eql(\"OK\");",
+									"});",
+									"",
+									"pm.test(\"verify that token is returned\", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"token\");",
+									"});",
+									"",
+									"pm.test(\"verify ghat id is returned\", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"id\");",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"id": "db1bb963-99cf-4752-8b03-0463af0fab6d",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "x-api-key",
+								"value": "reqres-free-v1",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"eve.holt@reqres.in\",\n    \"password\": \"pistol\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{baseUrl}}/register"
+					},
+					"response": [
+						{
+							"id": "822552ad-dbea-44a7-b6dc-cae2ec18e475",
+							"name": "Success",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"username\": \"tempor dolor nisi\",\n  \"email\": \"officia incididunt enim\",\n  \"password\": \"deserunt laboris\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "{{baseUrl}}/register"
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"responseTime": null,
+							"body": "{\n  \"id\": \"non\",\n  \"token\": \"est fugiat\"\n}"
+						},
+						{
+							"id": "f4a8bc7e-2d9a-4651-97fa-49003582851d",
+							"name": "Register error",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"username\": \"tempor dolor nisi\",\n  \"email\": \"officia incididunt enim\",\n  \"password\": \"deserunt laboris\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "{{baseUrl}}/register"
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"responseTime": null,
+							"body": "{\n  \"error\": \"occaecat\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Creates a user - Invalid Email",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "9a5692ee-2c26-4757-a2d3-6a590ba40f65",
+								"exec": [
+									"pm.test(\"Status code is 400\", function () {",
+									"    pm.response.to.have.status(400);",
+									"});",
+									"",
+									"pm.test(\"Status message is Bad Request\", function () {",
+									"    pm.expect(pm.response.status).to.eql(\"Bad Request\");",
+									"});",
+									"",
+									"pm.test(\"verify that error is returned\", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"Note: Only defined users succeed registration\");",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"id": "bd3442bf-aa61-4cfe-bec1-d11d45acdf48",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "x-api-key",
+								"value": "reqres-free-v1",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"eve.hoeqres.in\",\n    \"password\": \"pistol\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{baseUrl}}/register"
+					},
+					"response": [
+						{
+							"id": "2e1d5e14-c514-40b3-8fe8-8e068bd9df1f",
+							"name": "Success",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"username\": \"tempor dolor nisi\",\n  \"email\": \"officia incididunt enim\",\n  \"password\": \"deserunt laboris\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "{{baseUrl}}/register"
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"responseTime": null,
+							"body": "{\n  \"id\": \"non\",\n  \"token\": \"est fugiat\"\n}"
+						},
+						{
+							"id": "6e6356cf-94a4-498b-bdb5-7b17d3560f2b",
+							"name": "Register error",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"username\": \"tempor dolor nisi\",\n  \"email\": \"officia incididunt enim\",\n  \"password\": \"deserunt laboris\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "{{baseUrl}}/register"
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"responseTime": null,
+							"body": "{\n  \"error\": \"occaecat\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Creates a user - Empty field - Password",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "f6221fb0-13d3-4035-86d3-a18c6f1c00d2",
+								"exec": [
+									"pm.test(\"Status code is 400\", function () {",
+									"    pm.response.to.have.status(400);",
+									"});",
+									"",
+									"pm.test(\"Status message is Bad Request\", function () {",
+									"    pm.expect(pm.response.status).to.eql(\"Bad Request\");",
+									"});",
+									"",
+									"pm.test(\"verify that error is returned\", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"Missing password\");",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"id": "b9ab42bf-540f-4d58-b864-8c127f4d3707",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "x-api-key",
+								"value": "reqres-free-v1",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"eve.holt@reqres.in\",\n    \"password\": \"\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{baseUrl}}/register"
+					},
+					"response": [
+						{
+							"id": "e276e802-99b0-46c0-a7ba-f7862a3be8b6",
+							"name": "Success",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"username\": \"tempor dolor nisi\",\n  \"email\": \"officia incididunt enim\",\n  \"password\": \"deserunt laboris\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "{{baseUrl}}/register"
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"responseTime": null,
+							"body": "{\n  \"id\": \"non\",\n  \"token\": \"est fugiat\"\n}"
+						},
+						{
+							"id": "28d4df73-a529-400f-b95f-eaee11be30f1",
+							"name": "Register error",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"username\": \"tempor dolor nisi\",\n  \"email\": \"officia incididunt enim\",\n  \"password\": \"deserunt laboris\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "{{baseUrl}}/register"
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"responseTime": null,
+							"body": "{\n  \"error\": \"occaecat\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Creates a user - Empty field - Email",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "f6221fb0-13d3-4035-86d3-a18c6f1c00d2",
+								"exec": [
+									"pm.test(\"Status code is 400\", function () {",
+									"    pm.response.to.have.status(400);",
+									"});",
+									"",
+									"pm.test(\"Status message is Bad Request\", function () {",
+									"    pm.expect(pm.response.status).to.eql(\"Bad Request\");",
+									"});",
+									"",
+									"pm.test(\"verify that error is returned\", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"Missing email or username\");",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"id": "a0cdfa31-e3a7-4536-8637-176dcf0578a0",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "x-api-key",
+								"value": "reqres-free-v1",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"\",\n    \"password\": \"pistol\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{baseUrl}}/register"
+					},
+					"response": [
+						{
+							"id": "e5f3315b-09f3-417d-b8fb-8325b5d20539",
+							"name": "Success",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"username\": \"tempor dolor nisi\",\n  \"email\": \"officia incididunt enim\",\n  \"password\": \"deserunt laboris\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "{{baseUrl}}/register"
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"responseTime": null,
+							"body": "{\n  \"id\": \"non\",\n  \"token\": \"est fugiat\"\n}"
+						},
+						{
+							"id": "f8c2ca61-ed93-48eb-bda9-02e309b6abf5",
+							"name": "Register error",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"username\": \"tempor dolor nisi\",\n  \"email\": \"officia incididunt enim\",\n  \"password\": \"deserunt laboris\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "{{baseUrl}}/register"
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"responseTime": null,
+							"body": "{\n  \"error\": \"occaecat\"\n}"
+						}
+					]
+				}
+			],
+			"id": "3d4e93fb-ca94-441a-930c-c90555ea43a1"
+		},
+		{
+			"name": "Get User",
+			"item": [
+				{
+					"name": "Get a Single User",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "893ff83a-888b-40d0-9376-90f9040a8d2a",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Status message is OK\", function () {",
+									"    pm.expect(pm.response.status).to.eql(\"OK\");",
+									"});",
+									"",
+									"pm.test(\"verify ghat email is returned\", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"email\");",
+									"});",
+									"",
+									"pm.test(\"verify ghat id is returned\", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"id\");",
+									"});",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"id": "aacca54e-3502-4c08-8b43-724a139e4d20",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "x-api-key",
+								"value": "reqres-free-v1",
+								"type": "text"
+							}
+						],
+						"url": "{{baseUrl}}/users/7"
+					},
+					"response": []
+				}
+			],
+			"id": "35a97e75-dc65-4652-b456-6ac2190fcc6b"
+		},
+		{
+			"name": "Get Users",
+			"item": [
+				{
+					"name": "Get a list of users",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "5839152f-f030-4c95-83ca-a4bb39c2a9fe",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Status message is OK\", function () {",
+									"    pm.expect(pm.response.status).to.eql(\"OK\");",
+									"});",
+									"",
+									"pm.test(\"verify ghat email is returned\", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"email\");",
+									"});",
+									"",
+									"pm.test(\"verify ghat id is returned\", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"id\");",
+									"});",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"id": "9e072ab2-1061-4e94-822a-1668dd170741",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "x-api-key",
+								"value": "reqres-free-v1",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/users?page=2",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"users"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"id": "996b593f-3526-4fc7-bebd-d1bb85b2907c",
+							"name": "Success",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"username\": \"tempor dolor nisi\",\n  \"email\": \"officia incididunt enim\",\n  \"password\": \"deserunt laboris\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "{{baseUrl}}/register"
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"responseTime": null,
+							"body": "{\n  \"id\": \"non\",\n  \"token\": \"est fugiat\"\n}"
+						},
+						{
+							"id": "d60d8e01-8cf8-4603-8711-a91a6a357914",
+							"name": "Register error",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"username\": \"tempor dolor nisi\",\n  \"email\": \"officia incididunt enim\",\n  \"password\": \"deserunt laboris\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "{{baseUrl}}/register"
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"responseTime": null,
+							"body": "{\n  \"error\": \"occaecat\"\n}"
+						}
+					]
+				}
+			],
+			"id": "f8a5fba4-e934-47ab-8058-524883b8afcd"
+		},
+		{
+			"name": "Update User - PATCH",
+			"item": [
+				{
+					"name": "Update user - Success",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "5839152f-f030-4c95-83ca-a4bb39c2a9fe",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Status message is OK\", function () {",
+									"    pm.expect(pm.response.status).to.eql(\"OK\");",
+									"});",
+									"",
+									"pm.test(\"verify ghat name is returned\", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"name\");",
+									"});",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"id": "5b838897-f2d1-4d3d-8a49-3bbfbd9ed50a",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "x-api-key",
+								"value": "reqres-free-v1",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"AZ\",\n    \"job\": \"bello\"\n}\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{baseUrl}}/users/508"
+					},
+					"response": [
+						{
+							"id": "855b79f7-c78d-4ef3-811c-528c12364ebd",
+							"name": "Success",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"username\": \"tempor dolor nisi\",\n  \"email\": \"officia incididunt enim\",\n  \"password\": \"deserunt laboris\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "{{baseUrl}}/register"
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"responseTime": null,
+							"body": "{\n  \"id\": \"non\",\n  \"token\": \"est fugiat\"\n}"
+						},
+						{
+							"id": "8c084446-4a45-4ae5-be23-0d7b4641b8ce",
+							"name": "Register error",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"username\": \"tempor dolor nisi\",\n  \"email\": \"officia incididunt enim\",\n  \"password\": \"deserunt laboris\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "{{baseUrl}}/register"
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"responseTime": null,
+							"body": "{\n  \"error\": \"occaecat\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Update user - invalid names (alphanumeric name)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "5839152f-f030-4c95-83ca-a4bb39c2a9fe",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Status message is OK\", function () {",
+									"    pm.expect(pm.response.status).to.eql(\"OK\");",
+									"});",
+									"",
+									"pm.test(\"verify ghat name is returned\", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"name\");",
+									"});",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"id": "7962f64e-bda5-4c3e-90d7-7d2e5c9c9678",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "x-api-key",
+								"value": "reqres-free-v1",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"A789rfZ\",\n    \"job\": \"be789llo\"\n}\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{baseUrl}}/users/{{user_id}}"
+					},
+					"response": [
+						{
+							"id": "737f5758-368c-4aaa-afb9-356e8b12b0dd",
+							"name": "Success",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"username\": \"tempor dolor nisi\",\n  \"email\": \"officia incididunt enim\",\n  \"password\": \"deserunt laboris\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "{{baseUrl}}/register"
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"responseTime": null,
+							"body": "{\n  \"id\": \"non\",\n  \"token\": \"est fugiat\"\n}"
+						},
+						{
+							"id": "9b694ed1-f490-4922-a919-b937094750b8",
+							"name": "Register error",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"username\": \"tempor dolor nisi\",\n  \"email\": \"officia incididunt enim\",\n  \"password\": \"deserunt laboris\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "{{baseUrl}}/register"
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"responseTime": null,
+							"body": "{\n  \"error\": \"occaecat\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Update user -empty fields",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "5839152f-f030-4c95-83ca-a4bb39c2a9fe",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Status message is OK\", function () {",
+									"    pm.expect(pm.response.status).to.eql(\"OK\");",
+									"});",
+									"",
+									"pm.test(\"verify ghat name is returned\", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"name\");",
+									"});",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"id": "6fda037e-f74d-4a99-ad19-1a113524f635",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "x-api-key",
+								"value": "reqres-free-v1",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"\",\n    \"job\": \"\"\n}\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{baseUrl}}/users/505458"
+					},
+					"response": [
+						{
+							"id": "b63565a8-4a1e-4917-9a72-5b62343b970f",
+							"name": "Success",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"username\": \"tempor dolor nisi\",\n  \"email\": \"officia incididunt enim\",\n  \"password\": \"deserunt laboris\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "{{baseUrl}}/register"
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"responseTime": null,
+							"body": "{\n  \"id\": \"non\",\n  \"token\": \"est fugiat\"\n}"
+						},
+						{
+							"id": "09d15a7d-f0bf-4cb3-a03a-100b27921143",
+							"name": "Register error",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"username\": \"tempor dolor nisi\",\n  \"email\": \"officia incididunt enim\",\n  \"password\": \"deserunt laboris\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "{{baseUrl}}/register"
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"responseTime": null,
+							"body": "{\n  \"error\": \"occaecat\"\n}"
+						}
+					]
+				}
+			],
+			"id": "a19dc2b6-53da-4371-8943-10d862fce861"
+		},
+		{
+			"name": "Update User - PUT",
+			"item": [
+				{
+					"name": "Update user - Success",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "5839152f-f030-4c95-83ca-a4bb39c2a9fe",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Status message is OK\", function () {",
+									"    pm.expect(pm.response.status).to.eql(\"OK\");",
+									"});",
+									"",
+									"pm.test(\"verify ghat name is returned\", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"name\");",
+									"});",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"id": "38151c0b-3c2f-457f-92c8-a29b59892dbe",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "x-api-key",
+								"value": "reqres-free-v1",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"HII\",\n    \"job\": \"bello\"\n}\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{baseUrl}}/users/508"
+					},
+					"response": [
+						{
+							"id": "f1f59fe4-834b-4aa8-a003-fbad9d0780a6",
+							"name": "Success",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"username\": \"tempor dolor nisi\",\n  \"email\": \"officia incididunt enim\",\n  \"password\": \"deserunt laboris\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "{{baseUrl}}/register"
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"responseTime": null,
+							"body": "{\n  \"id\": \"non\",\n  \"token\": \"est fugiat\"\n}"
+						},
+						{
+							"id": "5fd46283-8cac-44d8-8760-4852c9d928b5",
+							"name": "Register error",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"username\": \"tempor dolor nisi\",\n  \"email\": \"officia incididunt enim\",\n  \"password\": \"deserunt laboris\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "{{baseUrl}}/register"
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"responseTime": null,
+							"body": "{\n  \"error\": \"occaecat\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Update user - invalid names (alphanumeric name)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "5839152f-f030-4c95-83ca-a4bb39c2a9fe",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Status message is OK\", function () {",
+									"    pm.expect(pm.response.status).to.eql(\"OK\");",
+									"});",
+									"",
+									"pm.test(\"verify ghat name is returned\", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"name\");",
+									"});",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"id": "d4b7143c-264a-45b9-b9fc-7b9705427b50",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "x-api-key",
+								"value": "reqres-free-v1",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"A789rfZ\",\n    \"job\": \"be789llo\"\n}\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{baseUrl}}/users/{{user_id}}"
+					},
+					"response": [
+						{
+							"id": "bfd1dae8-b4dd-4246-a4c9-330ed2c07bf9",
+							"name": "Success",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"username\": \"tempor dolor nisi\",\n  \"email\": \"officia incididunt enim\",\n  \"password\": \"deserunt laboris\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "{{baseUrl}}/register"
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"responseTime": null,
+							"body": "{\n  \"id\": \"non\",\n  \"token\": \"est fugiat\"\n}"
+						},
+						{
+							"id": "664323ed-010a-4f40-b8d8-fe63ffe0b9d0",
+							"name": "Register error",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"username\": \"tempor dolor nisi\",\n  \"email\": \"officia incididunt enim\",\n  \"password\": \"deserunt laboris\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "{{baseUrl}}/register"
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"responseTime": null,
+							"body": "{\n  \"error\": \"occaecat\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Update user -empty fields",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "5839152f-f030-4c95-83ca-a4bb39c2a9fe",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Status message is OK\", function () {",
+									"    pm.expect(pm.response.status).to.eql(\"OK\");",
+									"});",
+									"",
+									"pm.test(\"verify ghat name is returned\", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"name\");",
+									"});",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"id": "a785327c-3805-41c6-b521-f58d94a9bfe8",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "x-api-key",
+								"value": "reqres-free-v1",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"\",\n    \"job\": \"\"\n}\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{baseUrl}}/users/505458"
+					},
+					"response": [
+						{
+							"id": "28fb6380-116b-4aef-90b8-ebc145f8b077",
+							"name": "Success",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"username\": \"tempor dolor nisi\",\n  \"email\": \"officia incididunt enim\",\n  \"password\": \"deserunt laboris\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "{{baseUrl}}/register"
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"responseTime": null,
+							"body": "{\n  \"id\": \"non\",\n  \"token\": \"est fugiat\"\n}"
+						},
+						{
+							"id": "7920b23f-168b-4ee8-8262-b5d8820ee4b7",
+							"name": "Register error",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"username\": \"tempor dolor nisi\",\n  \"email\": \"officia incididunt enim\",\n  \"password\": \"deserunt laboris\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "{{baseUrl}}/register"
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"responseTime": null,
+							"body": "{\n  \"error\": \"occaecat\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Update user - non-existing ID",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "5839152f-f030-4c95-83ca-a4bb39c2a9fe",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Status message is OK\", function () {",
+									"    pm.expect(pm.response.status).to.eql(\"OK\");",
+									"});",
+									"",
+									"pm.test(\"verify ghat name is returned\", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"name\");",
+									"});",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"id": "41a8ce00-d33e-4005-96a6-cac0487480dd",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "x-api-key",
+								"value": "reqres-free-v1",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"greg\",\n    \"job\": \"taylor\"\n}\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{baseUrl}}/users/5054545678987678908"
+					},
+					"response": [
+						{
+							"id": "122bb721-dd25-44d8-946a-511e2354fad1",
+							"name": "Success",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"username\": \"tempor dolor nisi\",\n  \"email\": \"officia incididunt enim\",\n  \"password\": \"deserunt laboris\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "{{baseUrl}}/register"
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"responseTime": null,
+							"body": "{\n  \"id\": \"non\",\n  \"token\": \"est fugiat\"\n}"
+						},
+						{
+							"id": "85ed1ad2-f438-42c0-9fd0-1883798c70eb",
+							"name": "Register error",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"username\": \"tempor dolor nisi\",\n  \"email\": \"officia incididunt enim\",\n  \"password\": \"deserunt laboris\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "{{baseUrl}}/register"
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"responseTime": null,
+							"body": "{\n  \"error\": \"occaecat\"\n}"
+						}
+					]
+				}
+			],
+			"id": "c79744c5-ea67-4129-b9ea-f9de42795789"
+		},
+		{
+			"name": "Delete user",
+			"item": [
+				{
+					"name": "Update user - Success",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "5839152f-f030-4c95-83ca-a4bb39c2a9fe",
+								"exec": [
+									"pm.test(\"Status code is 204\", function () {",
+									"    pm.response.to.have.status(204);",
+									"});",
+									"",
+									"pm.test(\"Status message is No Content\", function () {",
+									"    pm.expect(pm.response.status).to.eql(\"No Content\");",
+									"});",
+									"",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"id": "7633556c-2fb4-4558-8cc7-764ffbca439d",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "x-api-key",
+								"value": "reqres-free-v1",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{baseUrl}}/users/508"
+					},
+					"response": [
+						{
+							"id": "f8bf4249-e30e-493b-885f-26211ba67ed8",
+							"name": "Success",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"username\": \"tempor dolor nisi\",\n  \"email\": \"officia incididunt enim\",\n  \"password\": \"deserunt laboris\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "{{baseUrl}}/register"
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"responseTime": null,
+							"body": "{\n  \"id\": \"non\",\n  \"token\": \"est fugiat\"\n}"
+						},
+						{
+							"id": "cc1cbc45-5f43-427b-8219-03a3162bf765",
+							"name": "Register error",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"username\": \"tempor dolor nisi\",\n  \"email\": \"officia incididunt enim\",\n  \"password\": \"deserunt laboris\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "{{baseUrl}}/register"
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"responseTime": null,
+							"body": "{\n  \"error\": \"occaecat\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Update user -empty field - ID",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "5839152f-f030-4c95-83ca-a4bb39c2a9fe",
+								"exec": [
+									"pm.test(\"Status code is 204\", function () {",
+									"    pm.response.to.have.status(204);",
+									"});",
+									"",
+									"pm.test(\"Status message is No Content\", function () {",
+									"    pm.expect(pm.response.status).to.eql(\"No Content\");",
+									"});",
+									"",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"id": "3483e298-03d1-4857-8f59-c2c4c654db61",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "x-api-key",
+								"value": "reqres-free-v1",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{baseUrl}}/users"
+					},
+					"response": [
+						{
+							"id": "a907d18b-95c6-47b0-af97-547f6d6289e3",
+							"name": "Success",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"username\": \"tempor dolor nisi\",\n  \"email\": \"officia incididunt enim\",\n  \"password\": \"deserunt laboris\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "{{baseUrl}}/register"
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"responseTime": null,
+							"body": "{\n  \"id\": \"non\",\n  \"token\": \"est fugiat\"\n}"
+						},
+						{
+							"id": "58d9e965-ad41-4132-995b-5495b6487607",
+							"name": "Register error",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"username\": \"tempor dolor nisi\",\n  \"email\": \"officia incididunt enim\",\n  \"password\": \"deserunt laboris\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "{{baseUrl}}/register"
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"responseTime": null,
+							"body": "{\n  \"error\": \"occaecat\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Update user - non-existing ID",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "5839152f-f030-4c95-83ca-a4bb39c2a9fe",
+								"exec": [
+									"pm.test(\"Status code is 204\", function () {",
+									"    pm.response.to.have.status(204);",
+									"});",
+									"",
+									"pm.test(\"Status message is No Content\", function () {",
+									"    pm.expect(pm.response.status).to.eql(\"No Content\");",
+									"});",
+									"",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"id": "bbce2bba-c8e1-4a48-b9d3-b34f8858efc5",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "x-api-key",
+								"value": "reqres-free-v1",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{baseUrl}}/users/5054545678987678908"
+					},
+					"response": [
+						{
+							"id": "da789661-a6c6-4f01-b457-89558896ad8b",
+							"name": "Success",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"username\": \"tempor dolor nisi\",\n  \"email\": \"officia incididunt enim\",\n  \"password\": \"deserunt laboris\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "{{baseUrl}}/register"
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"responseTime": null,
+							"body": "{\n  \"id\": \"non\",\n  \"token\": \"est fugiat\"\n}"
+						},
+						{
+							"id": "8d87fdf7-01a0-481d-97bb-c94d25e17ef9",
+							"name": "Register error",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"username\": \"tempor dolor nisi\",\n  \"email\": \"officia incididunt enim\",\n  \"password\": \"deserunt laboris\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "{{baseUrl}}/register"
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"responseTime": null,
+							"body": "{\n  \"error\": \"occaecat\"\n}"
+						}
+					]
+				}
+			],
+			"id": "20cee06d-235e-4ca8-b708-5a550fdf49f7"
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "6a746cb6-b9f5-463b-8e28-5d38b4ca6d2f",
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "48a19488-f199-47e2-acd2-8e46d61c985e",
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": ""
+		},
+		{
+			"key": "id",
+			"value": ""
+		},
+		{
+			"key": "user_id",
+			"value": ""
+		}
+	]
+}
